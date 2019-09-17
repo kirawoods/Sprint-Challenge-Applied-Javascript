@@ -30,4 +30,20 @@ function tabCreator(tabName) {
     tabContainer.appendChild(newTab);
 }
 
-tabCreator('steve');
+axios.get('https://lambda-times-backend.herokuapp.com/topics')
+.then(function (response) {
+  // handle success
+  const topicList = response.data.topics;
+  topicList.forEach(element => {
+      tabCreator(element);
+  });
+})
+.catch(function (error) {
+  // handle error
+  console.log(error);
+})
+.finally(function () {
+  // always executed
+});
+
+
