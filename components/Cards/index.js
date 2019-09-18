@@ -37,7 +37,7 @@ function cardCreator(articleObject) {
 
     const headline = document.createElement('div');
     headline.classList.add('headline');
-    headline.textContent = articleObject.data.articles.bootstrap[0].headline;
+    headline.textContent = articleObject.headline;
     card.appendChild(headline);
 
     const author = document.createElement('div');
@@ -62,7 +62,10 @@ function cardCreator(articleObject) {
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
     .then(function (response) {
     // handle success
-    cardCreator(response);
+
+    response.data.articles.bootstrap.forEach((element) => {
+        cardCreator(element);
+    })
     })
     .catch(function (error) {
     // handle error
